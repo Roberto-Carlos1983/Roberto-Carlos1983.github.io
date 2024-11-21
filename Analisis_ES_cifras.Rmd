@@ -1,0 +1,187 @@
+---
+title: "Resumen de El Salvador en cifras 2019-2023"
+author: "Roberto_Rodriguez"
+date: "2024-08-12"
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r libraries, include=FALSE}
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(foreign)
+library(tidyr)
+```
+
+# Centros educativos
+
+### Centros educativos por sector
+
+En general, los centros educativos del sector público se han mantenido constantes a lo largo del tiempo. Por otra parte, en el sector privado si se presentan importantes reducciones, principalmente en los departamentos de San Salvador y La Libertad.
+
+```{r cuadro1, echo=FALSE, fig.width=11, fig.height=8, fig.align="center"}
+cuadro1 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Cuadro1")
+
+g1 <- ggplot(cuadro1,aes(x=Year,y=Value, fill = Sector)) + 
+  geom_col(position = "dodge") + 
+  facet_wrap(~Departamento, scales = "free") +
+  geom_text(aes(label=format(Value,big.mark=",")),
+            position = position_dodge(width = .9))
+g1
+```
+
+### Centros educativos por nivel
+
+You can also embed plots, for example:
+
+```{r cuadro2, echo=FALSE, fig.width=11, fig.height=8, fig.align="center"}
+cuadro2 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Hoja2")
+
+fig1 <- plot_ly(cuadro2,x = ~Año, y = ~Ahuachapán, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig2 <- plot_ly(cuadro2,x = ~Año, y = ~Santa_Ana, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig3 <- plot_ly(cuadro2,x = ~Año, y = ~Sonsonate, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig4 <- plot_ly(cuadro2,x = ~Año, y = ~Chalatenango, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig5 <- plot_ly(cuadro2,x = ~Año, y = ~La_Libertad, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig6 <- plot_ly(cuadro2,x = ~Año, y = ~San_Salvador, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig7 <- plot_ly(cuadro2,x = ~Año, y = ~Cuscatlán, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig8 <- plot_ly(cuadro2,x = ~Año, y = ~La_Paz, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig9 <- plot_ly(cuadro2,x = ~Año, y = ~Cabañas, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig10 <- plot_ly(cuadro2,x = ~Año, y = ~San_Vicente, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig11 <- plot_ly(cuadro2,x = ~Año, y = ~Usulután, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig12 <- plot_ly(cuadro2,x = ~Año, y = ~San_Miguel, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig13 <- plot_ly(cuadro2,x = ~Año, y = ~Morazán, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+fig14 <- plot_ly(cuadro2,x = ~Año, y = ~La_Unión, type = "scatter", mode="line",split = ~Nivel) %>%
+  layout(showlegend=FALSE)
+
+p <- subplot(fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9, fig10, fig11,
+        fig12, fig13, fig14, shareX = T, nrows = 4) %>%
+  layout(margin = 0.01,
+         annotations = list(
+           list(x = 0.05 , y = 1.1, text = "Ahuachapán", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.35 , y = 1.1, text = "Santa Ana", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.60 , y = 1.1, text = "Sonsonate", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.90 , y = 1.1, text = "Chalatenango", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.05 , y = 0.75, text = "La Libertad", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.35 , y = 0.75, text = "San Salvador", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.60 , y = 0.75, text = "Cuscatlán", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.90 , y = 0.75, text = "La Paz", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.05 , y = 0.50, text = "Cabañas", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.35 , y = 0.50, text = "San Vicente", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.60 , y = 0.50, text = "Usulután", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.90 , y = 0.50, text = "San Miguel", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.05 , y = 0.23, text = "Morazán", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.35 , y = 0.23, text = "La Unión", showarrow = F, xref='paper', yref='paper')))
+p
+```
+
+# Estudiantes
+
+### Matrícula por nivel
+
+- En educación inicial y parvularia se observan incrementos importantes en la matrícula.  
+- En educación básica del primer y segundo ciclo, se registraron reducciones hasta el 2022, 
+para luego incrementarse en 2023.  
+- En educación media se tienen una tendencia decreciente.
+
+```{r cuadro3, echo=FALSE,fig.width=11, fig.height=8, fig.align="center", warning=FALSE}
+cuadro3 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Cuadro3")
+
+ggplot(cuadro3, aes(x=Año,y=Valor)) +
+  geom_line() + 
+  facet_wrap(~Nivel, scales = "free") +
+  geom_text(aes(label = format(Valor,big.mark=",")),size = 3) +
+  scale_x_continuous(limits = c(2018,2024), breaks = seq(2018,2024,1))
+```
+
+Para 2023, del total de matriculados, la mayor parte se tienen en primer y segundo ciclo.
+
+```{r piechart1, echo=FALSE, fig.align="center"}
+cuadro3_2023 <- cuadro3 %>%
+  filter(Año==2023) %>%
+  mutate(Valor=replace_na(Valor,0))
+
+plot_ly(cuadro3_2023, labels = ~Nivel, values = ~Valor, type = 'pie')
+```
+
+### Matrícula por grado
+
+- En 2023, la matrícula de educación inicial, parvularia 4 y 5 se incrementaron respecto del año anterior, en tanto que parvularia 6 registró una disminución.    
+- Primer grado viene registrando dos años consecutivos de incremento de matrícula.  
+- En educación media, mientras el primer año de bachillerato presentó una reducción, se tiene un incremento en segundo año de bachillerato.
+
+```{r matricula_grado, echo=FALSE, fig.width=10, fig.align="center"}
+cuadro4 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Cuadro4")
+plot_ly(cuadro4, x = ~Año, y = ~Ed_Inicial, name = "Ed. Inicial", type = "scatter", mode = "lines+markers") %>%
+  add_trace(y = ~Par_4, name = "Parv.4", mode = "lines+markers") %>%
+  add_trace(y = ~Par_5, name = "Parv.5", mode = "lines+markers") %>%
+  add_trace(y = ~Par_6, name = "Parv.6", mode = "lines+markers") %>%
+  add_trace(y = ~Primer, name = "1er Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Segundo, name = "2do Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Tercer, name = "3er Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Cuarto, name = "4to Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Quinto, name = "5to Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Sexto, name = "6to Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Séptimo, name = "7mo Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Octavo, name = "8vo Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Noveno, name = "9no Grado", mode = "lines+markers") %>%
+  add_trace(y = ~Pri_Bach, name = "1er Bachillerato", mode = "lines+markers") %>%
+  add_trace(y = ~Seg_Bach, name = "2do Bachillerato", mode = "lines+markers") %>%
+  add_trace(y = ~Ter_Bach, name = "3er Bachillerato", mode = "lines+markers") %>%
+  add_trace(y = ~Cua_Bach, name = "4to Bachillerato", mode = "lines+markers") %>%
+  add_trace(y = ~Pri_Adu, name = "1er Adultos", mode = "lines+markers") %>%
+  add_trace(y = ~Seg_Adu, name = "2do Adultos", mode = "lines+markers") %>%
+  add_trace(y = ~Ter_Adu, name = "3er Adultos", mode = "lines+markers") %>%
+  layout(yaxis=list(title="Número de matriculados"))
+```
+
+### Histórico de matrícula por departamento, por grado y sector
+
+```{r matricula_grado_sector, echo=FALSE, fig.width=12, fig.height=12}
+cuadro5 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Cuadro5")
+cuadro5_prueba <- filter(cuadro5,
+                         Año>=2022)
+
+ggplot(cuadro5_prueba, aes(x=interaction(Año,Nivel),y=Valor,fill = Sector, group = Nivel)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~Departamento) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  geom_text(aes(label = Valor), position = position_stack(vjust = .5), size = 2)
+```
+
+
+### Matrícula por zona
+
+```{r matricula_zona, echo=FALSE, fig.width=10, fig.height=8, warning=FALSE}
+cuadro6 <- readxl::read_xlsx("C:\\Users\\RCrodriguez\\Documents\\Roberto\\MINED\\Analisis\\Base.xlsx",
+                             sheet = "Cuadro6")
+
+plot_ly(cuadro6, x=~Nivel, y=~Valor, size = ~Valor, color = ~Zona, frame = ~Año,
+        hoverinfo = "text",
+        type = 'scatter',
+        mode = 'markers',
+        text = ~Valor)
+```
+
+
+
